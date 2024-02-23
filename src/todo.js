@@ -3,6 +3,7 @@ import './todo.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 function Todo() {
     const data = useParams();
     const email = data.email;
@@ -39,46 +40,42 @@ function Todo() {
             }
         }
     }
+    useEffect(()=>{
     async function getData(){
-        try{
-                const response = await axios.post('http://localhost:8000/get-data',{email})
-                const responseData = response.data
-                if(responseData.status === 'success')
-                    {
-                       
-                        updateTitle(responseData.todo_user)
-                        const new_to = responseData.todoList;
-                        if(new_to.length >0){
-                            updateTodo(new_to)
-                            
-                        }
-                       
-                        
-                        
-                    }
-         
-                else if(responseData.status === 'notasks'){
-                    alert("There is no todos....!")
-                }
-                else if(responseData.status === 'nodata'){
-                    alert('User not found in the database')
-                }
-                else{
-                    alert('Sorry Teja')
-                }
-        }
-        catch(e){
+        try {
+            const response = await axios.post('http://localhost:8000/get-data', { email })
+            const responseData = response.data
+            if (responseData.status === 'success')
+             {
+                updateTitle(responseData.todo_user)
+                const new_to = responseData.todoList;
+                if (new_to.length > 0)
+                   {updateTodo(new_to) }
+            }
+
+            else if (responseData.status === 'notasks')
+             {
+                alert("There is no todos....!")
+             }
+            else if (responseData.status === 'nodata')
+             {
+                alert('User not found in the database')
+             }
+            else {
+                alert('Sorry Teja')
+             }
+         }
+         catch (e) {
             console.log(e)
-        }
-    }
-        useEffect(()=>{
-            getData()
-        },[])
+          }
+      }
+    getData();
+        },[email])
 
     function toggleshow() {
         updateshowbut(!showbut)
-        
-       
+
+
     }
 
     async function deletetodo(deleteTask) {
@@ -97,7 +94,7 @@ function Todo() {
 
     }
     function Display() {
-       
+
         return (
             <ul className='list-group'>
 
@@ -106,15 +103,15 @@ function Todo() {
                         <button onClick={() => deletetodo(item)
                         } style={{ border: 'none', borderRadius: '6px', marginRight: '6px' }}>❌</button></ul></>
                 ))}
-                 {(todoList.length === 0) && <><br/><br/><p className='self' >Hey {title}....! There are No Tasks</p></>}
-                   
+                {(todoList.length === 0) && <><br /><br /><p className='self' >Hey {title}....! There are No Tasks</p></>}
+
             </ul>)
     }
     function Logout() {
         navigate('/')
 
     }
-   
+
     return (
         <>
             <div style={{
@@ -140,7 +137,7 @@ function Todo() {
 
                 </div>
 
-              
+
                 {showbut && <Display />}
 
             </div>
