@@ -1,0 +1,13 @@
+.login{
+    background-color: aqua;
+    color: red;
+    border:2px solid black;
+    align-items: center;
+    width:400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-content: center;
+    padding: 15px 15px;
+}
