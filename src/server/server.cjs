@@ -10,14 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(
   {
-    origin:['https://mern-todo-dun-eta.vercel.app'],
+    origin:'*',
     methods:['POST','GET'],
     credentials:true
   }
 ));
 
-app.get('/teja',async (req,res)=>{
-  res.send({status:'hi'})
+app.get('/',async (req,res)=>{
+  res.send("Hello Teja")
 })
 
 //=============================================================================
