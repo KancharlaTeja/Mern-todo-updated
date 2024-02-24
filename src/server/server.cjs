@@ -8,8 +8,17 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(
+  {
+    origin:[''],
+    methods:['POST','GET'],
+    credentials:true
+  }
+));
 
+app.get('/teja',async (req,res)=>{
+  res.send({status:'hi'})
+})
 
 //=============================================================================
 app.post("/", async (req, res) => {
