@@ -1,12 +1,24 @@
+
+
+// mongoose.connect("mongodb://localhost:27017/db")
+//     .then(() => {
+//         console.log('MongoDB connected');
+//     })
+//     .catch((error) => {
+//         console.error('Error connecting to MongoDB:', error);
+//     });
+
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost:27017/db")
+
+mongoose.connect('mongodb+srv://kancharlavinay1240:Rb6UzXvjzXYZlhXX@cluster0.s9uokzr.mongodb.net/db?retryWrites=true&w=majority')
     .then(() => {
         console.log('MongoDB connected');
     })
     .catch((error) => {
-        console.error('Error connecting to MongoDB:', error);
+        console.error('Error connecting to MongoDB Atlas:', error);
     });
+
 
 //======================================================================================================================
 

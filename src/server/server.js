@@ -25,15 +25,13 @@ app.post("/", async (req, res) => {
 
       if (user.password === password)
       {
-          const exist_user = LoginSchema1.findOne({ email: email })
-            if (!exist_user)
-            {
-              await LoginSchema1.create({ email: email, password: password })
+          const user_had = await LoginSchema1.findOne({email:user.email})
+          if(user_had){
+              //await LoginSchema1.create({ email: email, password: password })
               res.json({ status: 'success', email: user.email })
-            }
-       
-            else 
-            {
+      }
+            else{
+              await LoginSchema1.create({ email: email, password: password })
               res.json({ status: 'success', email: user.email })
             }
 
@@ -92,7 +90,6 @@ app.post('/get-data', async (req, res) => {
      {
       if(user_m.task)
           {
-            console.log('Teja we enetered if')
           const userTodos = user_m.task;
           const get_name = await SignupSchema1.findOne({email:req.body.email})
          
